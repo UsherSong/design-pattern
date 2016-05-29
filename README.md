@@ -1,2 +1,2 @@
 # design-pattern
-for  record
+1、策略模式【strategy pattern】
