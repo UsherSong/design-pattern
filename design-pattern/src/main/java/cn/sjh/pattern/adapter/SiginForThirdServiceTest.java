@@ -1,6 +1,7 @@
 package cn.sjh.pattern.adapter;
 
-import com.gupaoedu.vip.pattern.adapter.passport.SiginForThirdService;
+
+import cn.sjh.pattern.adapter.passport.SiginForThirdService;
 
 /**
  * Created by Tom on 2018/3/14.

@@ -11,7 +11,7 @@ import java.util.Map;
  */
 public class EventLisenter {
 
-    protected Map<Enum,Event> events = new HashMap<>();
+    protected Map<Enum,Event> events = new HashMap<Enum, Event>();
 
 
     public void addLisenter(Enum eventType,Object target,Method callBack){
