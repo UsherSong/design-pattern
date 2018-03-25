@@ -14,12 +14,11 @@ public class SigninForThirdService implements ISigninForThirdService {
         this.service = service;
     }
 
-    @Override
     public ResultMsg regist(String username, String password) {
         return service.regist(username,password);
     }
 
-    @Override
+
     public ResultMsg login(String username, String password) {
         return service.login(username,password);
     }

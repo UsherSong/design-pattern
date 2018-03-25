@@ -2,7 +2,9 @@ package cn.sjh.pattern.strategy.pay;
 
 
 
+import cn.sjh.pattern.strategy.pay.payport.AliPay;
 import cn.sjh.pattern.strategy.pay.payport.PayType;
+import cn.sjh.pattern.strategy.pay.payport.Payment;
 
 import java.util.ArrayList;
 import java.util.Comparator;
@@ -24,6 +26,11 @@ public class PayStrategyTest {
 
         //这个值是在支付的时候才决定用哪个值
         System.out.println(order.pay(PayType.WECHAT_PAY));
+
+//        System.out.println(order.pay(PayType.WECHAT_PAY));
+
+        Payment payment = new AliPay();
+        order.pay(payment);
 
         //BeanFactory
 

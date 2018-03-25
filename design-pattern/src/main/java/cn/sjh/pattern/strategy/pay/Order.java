@@ -2,6 +2,7 @@ package cn.sjh.pattern.strategy.pay;
 
 
 import cn.sjh.pattern.strategy.pay.payport.PayType;
+import cn.sjh.pattern.strategy.pay.payport.Payment;
 
 /**
  * Created by Tom on 2018/3/11.
@@ -25,6 +26,10 @@ public class Order {
     //更不需要写if    else if
     public PayState pay(PayType payType){
         return payType.get().pay(this.uid,this.amount);
+    }
+
+    public PayState pay(Payment payment){
+        return payment.pay(this.uid,this.amount);
     }
 
 }
