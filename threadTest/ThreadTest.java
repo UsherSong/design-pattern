@@ -1,9 +1,7 @@
 package com.gupaoedu.user.services;
 
-import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Executors;
-import java.util.concurrent.ScheduledExecutorService;
-import java.util.concurrent.TimeUnit;
+import java.util.Map;
+import java.util.concurrent.*;
 
 /**
  * Created  by songjh on 2018-07-05 05:58.
@@ -12,6 +10,7 @@ public class ThreadTest {
 
     private ExecutorService executorService;
     private ScheduledExecutorService scheduledExecutorService;
+    private Map<Integer,Boolean> failRecordCache = new ConcurrentHashMap<Integer,Boolean>();
 
     public void init() {
         System.out.println("----init----");
@@ -40,17 +39,17 @@ public class ThreadTest {
         @Override
         public void run() {
             boolean invokeResult = doProcess(i);
-//            System.out.println(retryCount);
             if (!invokeResult && retryCount < 2) {
                 retryCount++;
-               // System.out.println("retryCount=" + retryCount);
                 scheduledExecutorService.schedule(new AsynTask(i, retryCount), 10, TimeUnit.SECONDS);
             }
-
-            if (invokeResult || retryCount >= 2) {
-                doSomeThing(invokeResult, i, retryCount);
-            }
-
+//            if (invokeResult) {
+//                doSomeThing(invokeResult, i, retryCount);
+//            }else if(retryCount==2 && failRecordCache.get(i)==null){
+//                failRecordCache.put(i,true);
+//                doSomeThing(invokeResult, i, retryCount);
+//            }
+//            System.out.println(cache);
         }
     }
 
@@ -63,15 +62,15 @@ public class ThreadTest {
 
     private boolean doProcess(int i) {
         if (i % 2 == 0) {
-//            System.out.println(Thread.currentThread().getName() +
-//                    ",i=" + i +
-//                    ",doProcess=" + true );
+            System.out.println(Thread.currentThread().getName() +
+                    ",i=" + i +
+                    ",doProcess=" + true );
 
             return true;
         } else {
-//        System.out.println(Thread.currentThread().getName() +
-//                ",i=" + i +
-//                ",doProcess=" + false );
+        System.out.println(Thread.currentThread().getName() +
+                ",i=" + i +
+                ",doProcess=" + false );
             return false;
         }
     }
